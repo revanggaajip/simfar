@@ -50,6 +50,7 @@ $routes->setAutoRoute(true);
         $routes->get('/', 'PenerimaanController::index', ['as' => 'penerimaan.index']);
         $routes->get('create', 'PenerimaanController::create', ['as' => 'penerimaan.create']);
         $routes->post('create', 'PenerimaanController::store', ['as' => 'penerimaan.store']);
+        $routes->get('detail/(:any)', 'PenerimaanController::detail/$1', ['as' => 'penerimaan.detail']);
         // $routes->post('tambah-keranjang', 'PenerimaanController::tambahKeranjang');
         // $routes->get('lihat-keranjang', 'PenerimaanController::lihatKeranjang');
         // $routes->get('hapus-keranjang/(:any)', 'PenerimaanController::hapusKeranjang/$1');

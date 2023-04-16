@@ -24,7 +24,11 @@ class PenerimaanController extends BaseController
 
     public function index()
     {
-        //
+        $data['validation'] = $this->services::validation();
+        $data['title'] = $this->title;
+        $data['listHeader'] = $this->header->findAll();
+        $data['breadcrumb'] = $this->breadcrumb($this->title);
+        return view('penerimaan/index', $data);
     }
 
     public function create()
@@ -91,6 +95,20 @@ class PenerimaanController extends BaseController
             return redirect()->to(route_to('kategori.index'))->with('error', 'Data Kategori Obat Gagal Disimpan');
         }
     }
+
+    public function detail($id)
+    {
+        $data['validation'] = $this->services::validation();
+        $data['title'] = $this->title;
+        // $data['listObat'] = $this->obat->where('stok >', 0)->get()->getResultArray();
+        $data['breadcrumb'] = $this->breadcrumb($this->title);
+        $data['header'] = $this->header->find($id);
+        $data['listPenerimaan'] = $this->detail->select('penerimaan_detail.id, obat.nama, obat.satuan, penerimaan_detail.quantity')->join('obat', 'obat.id = penerimaan_detail.id_obat')->where('id_penerimaan_header', $id)->findAll();
+        // dd($data);
+        return view('penerimaan/detail', $data);
+    }
+
+
 
 
 }
