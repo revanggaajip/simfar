@@ -1,14 +1,15 @@
 <?= $this->extend('layouts/main'); ?>
 
 <?= $this->section('title'); ?>
-<?= $title ?? null ?>
+<?= 'Edit' . $title ?? null ?>
 <?= $this->endSection(); ?>
 
 <?= $this->section('content'); ?>
 <div class="container-fluid">
     <div class="card">
-        <form action="<?= route_to('penerimaan.store'); ?>" method="post">
+        <form action="<?= route_to('penerimaan.update', $header['id']); ?>" method="post">
             <?= csrf_field() ?>
+            <!-- <input type="hidden" name="_method" value="PUT"> -->
             <div class="card-header">
                 <h5>
                     <?= $title; ?>
@@ -19,14 +20,15 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="no_faktur" class="form-label">No. Faktur</label>
-                            <input type="text" class="form-control" name="no_faktur" id="no_faktur">
+                            <input type="text" class="form-control" name="no_faktur" id="no_faktur"
+                                value="<?= $header['no_faktur']; ?>">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="tanggal" class="form-label">Tanggal</label>
                             <input type="date" class="form-control" name="tanggal" id="tanggal"
-                                value="<?= date('Y-m-d') ?>">
+                                value="<?= $header['tanggal'] ?>">
                         </div>
                     </div>
                 </div>
@@ -34,13 +36,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="sp" class="form-label">No. Surat Pemesanan</label>
-                            <input type="text" class="form-control" name="sp" id="sp">
+                            <input type="text" class="form-control" name="sp" id="sp" value="<?= $header['sp']; ?>">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nama_supplier" class="form-label">Nama Supplier</label>
-                            <input type="text" class="form-control" name="nama_supplier" id="nama_supplier">
+                            <input type="text" class="form-control" name="nama_supplier" id="nama_supplier"
+                                value="<?= $header['nama_supplier']; ?>">
                         </div>
                     </div>
                 </div>
@@ -53,16 +56,22 @@
                                 <th>Nama Obat</th>
                                 <th width="50px">Satuan</th>
                                 <th width="50px">Quantity</th>
+                                <th width="75px">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($listObat as $key => $obat) :?>
+                            <?php foreach($listPenerimaan as $key => $penerimaan) :?>
                             <tr>
-                                <input type="hidden" name="id_obat[]" value="<?= $obat['id']; ?>">
+                                <input type="hidden" name="id_detail[]" value="<?= $penerimaan['id']; ?>">
+                                <input type="hidden" name="id_obat[]" value="<?= $penerimaan['id_obat']; ?>">
                                 <td><?= $key+1; ?></td>
-                                <td><?= $obat['nama']; ?></td>
-                                <td><?= $obat['satuan']; ?></td>
-                                <td><input type="number" class="form-control" name="quantity[]"></td>
+                                <td><?= $penerimaan['nama']; ?></td>
+                                <td><?= $penerimaan['satuan']; ?></td>
+                                <td><input type="number" class="form-control" name="quantity[]"
+                                        value="<?= $penerimaan['quantity']; ?>"></td>
+                                <td>
+
+                                </td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -71,9 +80,9 @@
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-between">
-                    <a href="<?= route_to('home.index'); ?>" class="btn btn-danger text-white"><i
+                    <a href="<?= route_to('penerimaan.index'); ?>" class="btn btn-danger text-white"><i
                             class="fas fa-times"></i>
-                        Batal</a>
+                        Kembali</a>
                     <button type="submit" class="btn btn-success text-white"><i class="fas fa-save"></i> Simpan</button>
                 </div>
             </div>

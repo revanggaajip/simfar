@@ -84,4 +84,8 @@ class Validation
         'nama_supplier' => 'required'
     ];
 
+    public $detailPenerimaan  = [
+        'quantity' => 'required'
+    ];
+
 }

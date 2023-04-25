@@ -40,7 +40,8 @@ class RiwayatTable extends Migration
             ],
             'id_header'     => [
                 'type'              => 'BIGINT',
-                'constraint'        => 20
+                'constraint'        => 20,
+                'null'              => true
             ],
             'created_at'    => [
                 'type'          => 'DATETIME',
