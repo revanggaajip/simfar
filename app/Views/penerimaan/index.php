@@ -13,7 +13,8 @@
                     <?= $title; ?>
                 </h5>
                 <div>
-                    <a href="" class="btn btn-primary"><i class="fas fa-print"></i> Cetak</a>
+                    <a href="<?= route_to('penerimaan.filter'); ?>" class="btn btn-primary"><i class="fas fa-print"></i>
+                        Cetak</a>
                 </div>
             </div>
         </div>

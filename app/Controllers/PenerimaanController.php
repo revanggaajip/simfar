@@ -257,4 +257,12 @@ class PenerimaanController extends BaseController
             }
         }
 
+        public function filter()
+        {
+        $data['title'] = $this->title;
+        $data['listHeader'] = $this->header->findAll();
+        $data['breadcrumb'] = $this->breadcrumb($this->title);
+        return view('penerimaan/filter', $data);
+        }
+
     }
